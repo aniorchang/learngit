@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul {
+            list-style: none
+        }
+
+        body {
+            background-color: #333;
+        }
+
+        .nav {
+            width: 800px;
+            height: 42px;
+            margin: 100px auto;
+            background: url(images/rss.png) right center no-repeat;
+            background-color: #fff;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .nav li {
+            width: 83px;
+            height: 42px;
+            text-align: center;
+            line-height: 42px;
+            float: left;
+            cursor: pointer;
+        }
+
+        .nav span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+        }
+
+        ul {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <span id="cloud"></span>
+    <ul id="navBar">
+        <li>北京</li>
+        <li>上海</li>
+        <li>广州</li>
+        <li>深圳</li>
+        <li>武汉</li>
+        <li>合肥</li>
+        <li>青岛</li>
+        <li>海南</li>
+    </ul>
+</div>
+<script>
+    var cloud = document.getElementById("cloud");
+    var ul = document.getElementById("navBar");
+    var lis = ul.children;
+    var lastPosition = 0;
+    for (i = 0; i < lis.length; i++) {
+        lis[i].onmouseover = function () {
+            var target = this.offsetLeft;
+            animate(cloud, target);
+        };
+        lis[i].onmouseout = function () {
+            animate(cloud, lastPosition);
+        };
+        lis[i].onclick = function () {
+            lastPosition = this.offsetLeft;
+        };
+    }
+
+
+    function animate(obj, target) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            var leader = obj.offsetLeft;
+            var step = (target - leader) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            leader = leader + step;
+            obj.style.left = leader + "px";
+            if (leader === target) {
+                clearInterval(obj.timer);
+            }
+        }, 15)
+    }
+</script>
+</body>
+</html>
