@@ -18,14 +18,14 @@
 
         init: function (html) {
             if (html == null || html === '') {
-                // ½áÊø
+                // ç»“æŸ
                 return;
             }
             if (typeof html === 'function') {
-                //Èç¹ûÊÇÒ»¸öº¯Êı£¬ÄÇÃ´¾Í½«º¯Êı°ó¶¨µ½onloadÉÏ²¢·µ»Ø
+                //å¦‚æœæ˜¯ä¸€ä¸ªå‡½æ•°ï¼Œé‚£ä¹ˆå°±å°†å‡½æ•°ç»‘å®šåˆ°onloadä¸Šå¹¶è¿”å›
                 //onload = html
 
-                //ÅĞ¶ÏÊÇ·ñÒÑ¾­ÓĞº¯Êı
+                //åˆ¤æ–­æ˜¯å¦å·²ç»æœ‰å‡½æ•°
                 var oldFn = onload;
                 if (typeof oldFn === 'function') {
                     onload = function () {
@@ -42,7 +42,7 @@
                 if (/^</.test(html)) {
                     push.apply(this, parseHTML(html));
                 } else {
-                    // Ñ¡ÔñÆ÷
+                    // é€‰æ‹©å™¨
                     // select( html );
                     push.apply(this, Anior.select(html));
                     this.selector = html;
@@ -50,14 +50,14 @@
 
             }
             if (html && html.type === 'Anior') {
-                // ÊÇÒ»¸ö Anior ¶ÔÏó
-                // ½«´«ÈëµÄ Anior ¶ÔÏóËùÓĞµÄÔªËØ¶¼¼Óµ½ this ÖĞ
+                // æ˜¯ä¸€ä¸ª Anior å¯¹è±¡
+                // å°†ä¼ å…¥çš„ Anior å¯¹è±¡æ‰€æœ‰çš„å…ƒç´ éƒ½åŠ åˆ° this ä¸­
                 push.apply(this, html);
                 this.selector = html.selector;
                 this.events = html.events;
             }
 
-            //ÅĞ¶ÏÊÇ²»ÊÇÒ»¸öDOM¶ÔÏó
+            //åˆ¤æ–­æ˜¯ä¸æ˜¯ä¸€ä¸ªDOMå¯¹è±¡
             if (html.nodeType) {
                 //this[0] = html;
                 //this.length = 1;
@@ -68,7 +68,7 @@
 
         },
 
-        selector: '',//ÓÃÀ´±íÊ¾Ê¹ÓÃÁËÑ¡ÔñÆ÷
+        selector: '',//ç”¨æ¥è¡¨ç¤ºä½¿ç”¨äº†é€‰æ‹©å™¨
 
         type: 'Anior',
 
@@ -77,52 +77,52 @@
 
     Anior.fn.init.prototype = Anior.fn;
 
-    // Ìí¼Ó¿ÉÀ©Õ¹µÄ·½·¨ extend
+    // æ·»åŠ å¯æ‰©å±•çš„æ–¹æ³• extend
     Anior.extend = Anior.fn.extend = function (obj) {
         for (var k in obj) {
-            // if ( k ÊÇ obj ×Ô¼ºÌá¹©µÄ·½·¨ ) obj.hasOwnProperty( k )
+            // if ( k æ˜¯ obj è‡ªå·±æä¾›çš„æ–¹æ³• ) obj.hasOwnProperty( k )
             this[k] = obj[k];
         }
     }
 
 
-    //selectÒıÇæ
+    //selectå¼•æ“
     var select =
         (function () {
-            var push = [].push;//·½±ãÊéĞ´
+            var push = [].push;//æ–¹ä¾¿ä¹¦å†™
 
 
             try {
-                var div = document.createElement("div");//´´½¨Ò»¸ödiv
-                div.innerHTML = '<p></p>';//¸ødivÌí¼Óp±êÇ©
-                var arr = [];//¶¨ÒåÒ»¸öĞÂÊı×é
-                push.apply(arr, div.getElementsByTagName('p'));//½«ĞÂÔöµÄpÌí¼Óµ½arrÖĞ
+                var div = document.createElement("div");//åˆ›å»ºä¸€ä¸ªdiv
+                div.innerHTML = '<p></p>';//ç»™divæ·»åŠ pæ ‡ç­¾
+                var arr = [];//å®šä¹‰ä¸€ä¸ªæ–°æ•°ç»„
+                push.apply(arr, div.getElementsByTagName('p'));//å°†æ–°å¢çš„pæ·»åŠ åˆ°arrä¸­
             } catch (e) {
                 push = {
                     apply: function (array1, array2) {
-                        //½«array2Ñ­»·±éÀúµ½array1ºó
+                        //å°†array2å¾ªç¯éå†åˆ°array1å
                         for (var i = 0; i < array2.length; i++) {
-                            array1[array1.length++] = array2[i];//lengthĞèÒª++·ÀÖ¹ÌØÊâÇé¿ö
+                            array1[array1.length++] = array2[i];//lengthéœ€è¦++é˜²æ­¢ç‰¹æ®Šæƒ…å†µ
                         }
                     }
                 };
             }
 
-            // ÕıÔò±í´ïÊ½
+            // æ­£åˆ™è¡¨è¾¾å¼
             var rnative = /\{\s*\[native/;
             var rtrim = /^\s+|\s+$/g;
             var rbaseselector = /^(?:\#([\w\-]+)|\.([\w\-]+)|(\*)|(\w+))$/;
 
 
-            //»ù±¾º¯Êısupport¶ÔÏó
-            var support = {};//¶¨ÒåÒ»¸ö¶ÔÏó
+            //åŸºæœ¬å‡½æ•°supportå¯¹è±¡
+            var support = {};//å®šä¹‰ä¸€ä¸ªå¯¹è±¡
             support.qsa = rnative.test(document.querySelectorAll + '');
             support.getElementsByClassName = rnative.test(document.getElementsByClassName + '');
             support.trim = rnative.test(String.prototype.trim + '');
             support.indexOf = rnative.test(Array.prototype.indexOf + '');
 
 
-            //»ù±¾·½·¨
+            //åŸºæœ¬æ–¹æ³•
             function getByClassName(className, node) {
                 node = node || document;
                 var allElem, res = [], i;
@@ -140,13 +140,13 @@
                 }
             }
 
-            //×Ô¶¨ÒåÊµÏÖtrim·½·¨
+            //è‡ªå®šä¹‰å®ç°trimæ–¹æ³•
             var myTrim = function (str) {
                 if (support.trim) {
-                    //Èç¹ûÏµÍ³ÖĞÓĞtrim·½·¨£¬ÔòÖ±½Óµ÷ÓÃ¸Ã·½·¨²¢·µ»Ø
+                    //å¦‚æœç³»ç»Ÿä¸­æœ‰trimæ–¹æ³•ï¼Œåˆ™ç›´æ¥è°ƒç”¨è¯¥æ–¹æ³•å¹¶è¿”å›
                     return str.trim;
                 } else {
-                    //Èç¹ûÏµÍ³Ã»ÓĞtrim·½·¨£¬¾Í×Ô¶¨ÒåÊµÏÖ¸Ã·½·¨
+                    //å¦‚æœç³»ç»Ÿæ²¡æœ‰trimæ–¹æ³•ï¼Œå°±è‡ªå®šä¹‰å®ç°è¯¥æ–¹æ³•
                     return str.replace(rtrim, '');
                 }
             }
@@ -154,10 +154,10 @@
             var myIndexOf = function (array, search, startIndex) {
                 startIndex = startIndex || 0;
                 if (support.index) {
-                    //Èç¹ûÏµÍ³ÖĞÓĞindexOf·½·¨£¬ÔòÖ±½Óµ÷ÓÃ¸Ã·½·¨²¢·µ»Ø
+                    //å¦‚æœç³»ç»Ÿä¸­æœ‰indexOfæ–¹æ³•ï¼Œåˆ™ç›´æ¥è°ƒç”¨è¯¥æ–¹æ³•å¹¶è¿”å›
                     return array.indexOf(search, startIndex);
                 } else {
-                    //Èç¹ûÏµÍ³Ã»ÓĞindexOf·½·¨£¬¾Í×Ô¶¨ÒåÊµÏÖ¸Ã·½·¨
+                    //å¦‚æœç³»ç»Ÿæ²¡æœ‰indexOfæ–¹æ³•ï¼Œå°±è‡ªå®šä¹‰å®ç°è¯¥æ–¹æ³•
                     for (var i = startIndex; i < array.length; i++) {
                         if (array[i] === search) {
                             return i;
@@ -180,7 +180,7 @@
             function basicSelect(selector, node) {
                 node = node || document;
                 var m, res;
-                //¸ù¾İÖ®Ç°µÄÕıÔò±í´ïÊ½»ñµÃµÄÊı×éÀ´½øĞĞ·ÖÀàÅĞ¶Ï
+                //æ ¹æ®ä¹‹å‰çš„æ­£åˆ™è¡¨è¾¾å¼è·å¾—çš„æ•°ç»„æ¥è¿›è¡Œåˆ†ç±»åˆ¤æ–­
                 if (m = rbaseselector.exec(selector)) {
                     if (m[1]) { // id
                         res = document.getElementById(m[1]);
@@ -192,7 +192,7 @@
                     } else if (m[2]) {//class
                         return getByClassName(m[2], node);
                     } else {
-                        //m[3]ºÍm[4]ºÏ²¢
+                        //m[3]å’Œm[4]åˆå¹¶
                         return node.getElementsByTagName(selector);
                     }
                 }
@@ -205,7 +205,7 @@
 
                 var selectors = selector.split(' ');
 
-                // ¼Ù¶¨ 'div p .c'
+                // å‡å®š 'div p .c'
 
                 var arr = [], node = [document];
 
@@ -229,28 +229,28 @@
 
                 if (typeof selector != 'string') return results;
 
-                // ±íÃ÷²ÎÊı¶¼Ã»ÓĞÎÊÌâ, ½ÓÏÂÀ´¾ÍÊÇÈçºÎÑ¡Ôñ
-                // Ê×ÏÈÅĞ¶Ï qsa ÊÇ·ñ¿ÉÓÃ
-                // È»ºóÔÙ Ò»²½²½µÄ ×Ô¼ºÊµÏÖ
+                // è¡¨æ˜å‚æ•°éƒ½æ²¡æœ‰é—®é¢˜, æ¥ä¸‹æ¥å°±æ˜¯å¦‚ä½•é€‰æ‹©
+                // é¦–å…ˆåˆ¤æ–­ qsa æ˜¯å¦å¯ç”¨
+                // ç„¶åå† ä¸€æ­¥æ­¥çš„ è‡ªå·±å®ç°
                 if (support.qsa) {
                     push.apply(results, document.querySelectorAll(selector));
                 } else {
-                    // ²»´æÔÚÔÙÀ´¿¼ÂÇ×Ô¼ºÊµÏÖ
+                    // ä¸å­˜åœ¨å†æ¥è€ƒè™‘è‡ªå·±å®ç°
                     selectors = selector.split(',');
-                    // Ñ­»·
+                    // å¾ªç¯
                     for (i = 0; i < selectors.length; i++) {
                         subselector = myTrim(selectors[i]);
-                        // ½ÓÏÂÀ´¾ÍÊÇ ´¦Àí subselector
+                        // æ¥ä¸‹æ¥å°±æ˜¯ å¤„ç† subselector
                         if (rbaseselector.test(subselector)) {
-                            // »ù±¾Ñ¡ÔñÆ÷
+                            // åŸºæœ¬é€‰æ‹©å™¨
                             push.apply(results, basicSelect(subselector));
                         } else {
-                            // select2 º¯Êı
+                            // select2 å‡½æ•°
                             select2(subselector, results);
                         }
                     }
                 }
-                // ·µ»Ø result
+                // è¿”å› result
                 return unique(results);
             }
 
@@ -259,9 +259,9 @@
         })();
 
 
-    Anior.select = select;   // ÔÚĞèÒªµÄÊ±ºò ¿ÉÒÔÊ¹ÓÃµÚÈı·½µÄ Ñ¡ÔñÆ÷ÒıÇæ
+    Anior.select = select;   // åœ¨éœ€è¦çš„æ—¶å€™ å¯ä»¥ä½¿ç”¨ç¬¬ä¸‰æ–¹çš„ é€‰æ‹©å™¨å¼•æ“
 
-// ĞèÒªÒ»Ğ©ÅĞ¶ÏµÄ·½·¨
+// éœ€è¦ä¸€äº›åˆ¤æ–­çš„æ–¹æ³•
     Anior.extend({
         isString: function (data) {
             return typeof data === 'string';
@@ -283,8 +283,8 @@
 
     });
 
-// DOM ²Ù×÷µÄ·½·¨
-// ½«×Ö·û´®×ª»»Îª DOM ¶ÔÏóµÄº¯Êı
+// DOM æ“ä½œçš„æ–¹æ³•
+// å°†å­—ç¬¦ä¸²è½¬æ¢ä¸º DOM å¯¹è±¡çš„å‡½æ•°
     var parseHTML = (function () {
         var div = document.createElement('div');
 
@@ -302,10 +302,10 @@
     })();
 
     Anior.extend({
-        //Ìí¼Ó¾²Ì¬·½·¨eachºÍmap
+        //æ·»åŠ é™æ€æ–¹æ³•eachå’Œmap
         each: function (arr, func) {
             var i;
-            // ÔÚ ES5 ÖĞ»¹ÒıÈëÁË Array.isArray µÄ·½·¨×¨ÃÅÀ´ÅĞ¶ÏÊı×é
+            // åœ¨ ES5 ä¸­è¿˜å¼•å…¥äº† Array.isArray çš„æ–¹æ³•ä¸“é—¨æ¥åˆ¤æ–­æ•°ç»„
             if (arr instanceof Array || arr.length >= 0) {
                 for (i = 0; i < arr.length; i++) {
                     func.call(arr[i], i, arr[i]);
@@ -344,10 +344,10 @@
 
 
     Anior.fn.extend({
-        //Ìí¼ÓºËĞÄ·½·¨
-        //´Ë¿Ìthis´ú±í¸ù¾İÔ­ĞÍ´´½¨³öÀ´µÄÊµÀı
+        //æ·»åŠ æ ¸å¿ƒæ–¹æ³•
+        //æ­¤åˆ»thisä»£è¡¨æ ¹æ®åŸå‹åˆ›å»ºå‡ºæ¥çš„å®ä¾‹
 
-        //appendTo ·½·¨µÄÊµÏÖ
+        //appendTo æ–¹æ³•çš„å®ç°
 
 
         /*appendTo: function (dom) {
@@ -359,7 +359,7 @@
         /*
          appendTo: function (selector) {
          var iObj = this.constructor(selector);
-         //½« this[i] Ìí¼Óµ½ iObj[0] ÖĞ
+         //å°† this[i] æ·»åŠ åˆ° iObj[0] ä¸­
          for (var i = 0; i < this.length; i++) {
          iObj[ 0 ].appendChild( this[i] );
          }
@@ -367,40 +367,40 @@
          */
 
 
-        // ¸Ä½ø
+        // æ”¹è¿›
         /*
          appendTo: function (selector) {
          var iObj = this.constructor(selector);
-         // ½« this[i] Ìí¼Óµ½ iObj[j] ÖĞ
+         // å°† this[i] æ·»åŠ åˆ° iObj[j] ä¸­
          for (var i = 0; i < this.length; i++) {
          for(var j = 0 ; j < iObj.length ; j++){
          iObj[j].appendChild(this[i].cloneNode(true));
-         // µ«´ËÊ±»á¶à³öÒ»¸öthis[i]£¬ËùÒÔ»¹ĞèÒª¸Ä½ø£¬×îºóÒ»¸ö²»ĞèÒª¿ËÂ¡
+         // ä½†æ­¤æ—¶ä¼šå¤šå‡ºä¸€ä¸ªthis[i]ï¼Œæ‰€ä»¥è¿˜éœ€è¦æ”¹è¿›ï¼Œæœ€åä¸€ä¸ªä¸éœ€è¦å…‹éš†
          }
          }
          }
          */
 
 
-        // ÔÙ´Î¸Ä½ø
+        // å†æ¬¡æ”¹è¿›
         /*
-         // ×îºóÒ»´Î½«this[i]±¾ÌåÌí¼Óµ½iObj[j]ÖĞ
-         // Ò²¾ÍÊÇ×îºóÒ»´Î²»¿ËÂ¡
+         // æœ€åä¸€æ¬¡å°†this[i]æœ¬ä½“æ·»åŠ åˆ°iObj[j]ä¸­
+         // ä¹Ÿå°±æ˜¯æœ€åä¸€æ¬¡ä¸å…‹éš†
          appendTo: function (selector) {
          var iObj = this.constructor(selector);
-         //½« this[i] Ìí¼Óµ½ iObj[j] ÖĞ
+         //å°† this[i] æ·»åŠ åˆ° iObj[j] ä¸­
          for (var i = 0; i < this.length; i++) {
          for (var j = 0; j < iObj.length; j++) {
 
-         // ÈıÔª±í´ïÊ½µÄ·½·¨ÊéĞ´
+         // ä¸‰å…ƒè¡¨è¾¾å¼çš„æ–¹æ³•ä¹¦å†™
          iObj[j].appendChild(
-         j == iObj.length - 1    //ÅĞ¶ÏÌõ¼ş
-         ? this[i]    //ÅĞ¶ÏÌõ¼ş³ÉÁ¢Ê±Ö´ĞĞµÄ´úÂë
-         : this[i].cloneNode(true)    //ÅĞ¶ÏÌõ¼ş²»³ÉÁ¢ÊÇÖ´ĞĞµÄ´úÂë
+         j == iObj.length - 1    //åˆ¤æ–­æ¡ä»¶
+         ? this[i]    //åˆ¤æ–­æ¡ä»¶æˆç«‹æ—¶æ‰§è¡Œçš„ä»£ç 
+         : this[i].cloneNode(true)    //åˆ¤æ–­æ¡ä»¶ä¸æˆç«‹æ˜¯æ‰§è¡Œçš„ä»£ç 
          );
-         // ÅĞ¶ÏÊÇ×îºóÒ»´ÎµÄ·½·¨¾ÍÊÇ j==iObj.length-1
+         // åˆ¤æ–­æ˜¯æœ€åä¸€æ¬¡çš„æ–¹æ³•å°±æ˜¯ j==iObj.length-1
 
-         //if else µÄ·½·¨ÊéĞ´
+         //if else çš„æ–¹æ³•ä¹¦å†™
          /!*
          if (j == iObj.length - 1) {
          iObj[j].appendChild( this[i] );
@@ -413,7 +413,7 @@
          },
          */
 
-        //ÍêÕû°æ
+        //å®Œæ•´ç‰ˆ
         appendTo: function (selector) {
             var iObj = this.constructor(selector);
             var newObj = this.constructor();
@@ -442,7 +442,7 @@
                 }
             }
 
-            //ÁíÒ»ÖÖĞ´·¨
+            //å¦ä¸€ç§å†™æ³•
             /*
              this.constructor(selector).appendTo(this);
              */
@@ -450,7 +450,7 @@
             return this;
         },
 
-        //prependTo ·½·¨µÄÊµÏÖ
+        //prependTo æ–¹æ³•çš„å®ç°
 
         prependTo: function (selector) {
             var iObj = this.constructor(selector);
@@ -470,25 +470,25 @@
         },
 
 
-        //toArray ·½·¨µÄÊµÏÖ
-        //½«Anior¶ÔÏó×ª»¯ÎªÒ»¸öDOMÊı×é
+        //toArray æ–¹æ³•çš„å®ç°
+        //å°†Aniorå¯¹è±¡è½¬åŒ–ä¸ºä¸€ä¸ªDOMæ•°ç»„
 
         toArray: function () {
-            //arr.slice(0)±íÊ¾´ÓµÚ0¸öÔªËØ¿ªÊ¼½ØÈ¡Êı×é£¬¼´¿½±´Êı×é
-            return slice.call(this, 0);//ÕâÀïµÄslice¾­¹ıÉÏÃæµÄ²Ù×÷£¬slice = [].slice
+            //arr.slice(0)è¡¨ç¤ºä»ç¬¬0ä¸ªå…ƒç´ å¼€å§‹æˆªå–æ•°ç»„ï¼Œå³æ‹·è´æ•°ç»„
+            return slice.call(this, 0);//è¿™é‡Œçš„sliceç»è¿‡ä¸Šé¢çš„æ“ä½œï¼Œslice = [].slice
         },
 
-        //»òÕßÓÃ×Ô¶¨ÒåµÄ·½·¨£¬ÈçÏÂ:
+        //æˆ–è€…ç”¨è‡ªå®šä¹‰çš„æ–¹æ³•ï¼Œå¦‚ä¸‹:
 
         /*var res = [];
-         //±éÀú¶ÔÏóµÄÔªËØÌí¼Óµ½resÊı×éÀï
+         //éå†å¯¹è±¡çš„å…ƒç´ æ·»åŠ åˆ°resæ•°ç»„é‡Œ
          for (var i = 0; i < this.length; i++) {
          res.push(this[i]);
          }
          return res;*/
 
-        //get ·½·¨µÄÊµÏÖ
-        //¸ù¾İ²ÎÊıindex·µ»Ø¶ÔÓ¦ÏÂ±êµÄDOMÔªËØ£¬Èç¹ûindexÃ»ÓĞ´«µİ£¬ÄÇÃ´·µ»ØÕû¸öDOMÔªËØÊı×é
+        //get æ–¹æ³•çš„å®ç°
+        //æ ¹æ®å‚æ•°indexè¿”å›å¯¹åº”ä¸‹æ ‡çš„DOMå…ƒç´ ï¼Œå¦‚æœindexæ²¡æœ‰ä¼ é€’ï¼Œé‚£ä¹ˆè¿”å›æ•´ä¸ªDOMå…ƒç´ æ•°ç»„
         get: function (index) {
             if (index === undefined) {
                 return this.toArray();
@@ -498,32 +498,32 @@
 
         ,
 
-        //eq ·½·¨µÄÊµÏÖ
+        //eq æ–¹æ³•çš„å®ç°
         eq: function (num) {
             var dom;
             if (num >= 0) {
-                dom = this.get(num);//Èç¹û´«ÈëµÄ²ÎÊıÊÇÊı×Ö£¬¸ù¾İĞòºÅ»ñµÃÔªËØ¼´¿É£¬¶øÇÒµÃµ½µÄÊÇjQuery¶ÔÏó
+                dom = this.get(num);//å¦‚æœä¼ å…¥çš„å‚æ•°æ˜¯æ•°å­—ï¼Œæ ¹æ®åºå·è·å¾—å…ƒç´ å³å¯ï¼Œè€Œä¸”å¾—åˆ°çš„æ˜¯jQueryå¯¹è±¡
             } else {
-                dom = this.get(this.length + num);//Èç¹û´«ÈëµÄ²ÎÊıÊÇ¸ºÊı£¬ÄÇÃ´Ê¹ÓÃ length+Êı×Ö »ñµÃÔªËØ
+                dom = this.get(this.length + num);//å¦‚æœä¼ å…¥çš„å‚æ•°æ˜¯è´Ÿæ•°ï¼Œé‚£ä¹ˆä½¿ç”¨ length+æ•°å­— è·å¾—å…ƒç´ 
             }
-            //ÈıÔª±í´ïÊ½µÄ·½·¨ÊéĞ´   dom = this.get(num+(num>=0?0:this.length));
+            //ä¸‰å…ƒè¡¨è¾¾å¼çš„æ–¹æ³•ä¹¦å†™   dom = this.get(num+(num>=0?0:this.length));
             return this.constructor(dom);
         }
         ,
 
-        //Ìí¼ÓÊµÀı·½·¨eachºÍmap·½·¨
+        //æ·»åŠ å®ä¾‹æ–¹æ³•eachå’Œmapæ–¹æ³•
         each: function (func) {
-            Anior.each(this, func);//ÕâÀïµÄthis²»»á·¢Éú¸Ä±ä£¬ËùÒÔÖ±½Ó·µ»Øthis
+            Anior.each(this, func);//è¿™é‡Œçš„thisä¸ä¼šå‘ç”Ÿæ”¹å˜ï¼Œæ‰€ä»¥ç›´æ¥è¿”å›this
             return this;
         }
         ,
         map: function (func) {
-            var res = Anior.map(this, func);//ÕâÀïmapºó»á·µ»ØÒ»¸öĞÂÊı×é£¬ËùÒÔ¶¨ÒåÒ»¸ö±äÁ¿½ÓÊÕ,²¢·µ»Ø
+            var res = Anior.map(this, func);//è¿™é‡Œmapåä¼šè¿”å›ä¸€ä¸ªæ–°æ•°ç»„ï¼Œæ‰€ä»¥å®šä¹‰ä¸€ä¸ªå˜é‡æ¥æ”¶,å¹¶è¿”å›
             return res;
         }
     });
 
-    //ÊÂ¼ş´¦ÀíÄ£¿é
+    //äº‹ä»¶å¤„ç†æ¨¡å—
     Anior.fn.extend({
         on: function (type, fn) {
             if (!this.events[type]) {
@@ -549,13 +549,13 @@
             return this;
         },
 
-        //ÊÂ¼şÒÆ³ıº¯Êı
+        //äº‹ä»¶ç§»é™¤å‡½æ•°
         off: function (type, fn) {
             var arr = this.events[type];
             if (arr) {
-                //±éÀúÊı×é£¬´ÓÊı×éÖĞÉ¾³ıº¯Êı
+                //éå†æ•°ç»„ï¼Œä»æ•°ç»„ä¸­åˆ é™¤å‡½æ•°
                 for (var i = arr.length; i >= 0; i++) {
-                    //ÅĞ¶ÏµÚi¸öº¯ÊıÊÇ·ñºÍfnÒ»Ñù£¬Èç¹ûÒ»ÑùÔòÒÆ³ı
+                    //åˆ¤æ–­ç¬¬iä¸ªå‡½æ•°æ˜¯å¦å’Œfnä¸€æ ·ï¼Œå¦‚æœä¸€æ ·åˆ™ç§»é™¤
                     if (arr[i] == fn) {
                         arr.splice(i, 1);
                     }
@@ -566,20 +566,20 @@
 
     });
 
-    //ÆäËûÊÂ¼ş»ã×Ü
+    //å…¶ä»–äº‹ä»¶æ±‡æ€»
     var eventArr = ( "blur focus focusin focusout load resize scroll unload click dblclick " +
     "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
     "change select submit keydown keypress keyup error contextmenu" ).split(' ');
-    //±éÀúarrÖĞµÄÃ¿Ò»¸öÊÂ¼ş×Ö·û´®
+    //éå†arrä¸­çš„æ¯ä¸€ä¸ªäº‹ä»¶å­—ç¬¦ä¸²
     Anior.each(eventArr, function (i, v) {
-        // console.log(v); // Ã¿Ò»¸öÊÂ¼ş×Ö·û´®
+        // console.log(v); // æ¯ä¸€ä¸ªäº‹ä»¶å­—ç¬¦ä¸²
         Anior.fn[v] = function (fn) {
             this.on(v, fn);
-            return this; // this¾ÍÊÇAnior¶ÔÏó
+            return this; // thiså°±æ˜¯Aniorå¯¹è±¡
         }
     })
 
-    //hoverºÍtoggle
+    //hoverå’Œtoggle
     Anior.fn.extend({
         hover: function (f1, f2) {
             return this.mouseover(f1)
@@ -598,7 +598,7 @@
         }
     });
 
-    //ÑùÊ½²Ù×÷
+    //æ ·å¼æ“ä½œ
     Anior.fn.extend({
         /*
          css: function (option) {
@@ -622,155 +622,155 @@
          },
          */
 
-        // css ( ¸ødom¶ÔÏóÌí¼ÓÑùÊ½ )
+        // css ( ç»™domå¯¹è±¡æ·»åŠ æ ·å¼ )
         css: function (option) {
             var args = arguments,
                 len = args.length;
-            //Èç¹û²ÎÊıÊÇÁ½¸ö
+            //å¦‚æœå‚æ•°æ˜¯ä¸¤ä¸ª
             if (len == 2) {
-                //ÅĞ¶ÏÁ½¸ö²ÎÊıÊÇ·ñ¶¼Îª×Ö·û´®
-                //args[0]ÊÇÊôĞÔÃû£¬args[1]ÊÇÊôĞÔÖµ
+                //åˆ¤æ–­ä¸¤ä¸ªå‚æ•°æ˜¯å¦éƒ½ä¸ºå­—ç¬¦ä¸²
+                //args[0]æ˜¯å±æ€§åï¼Œargs[1]æ˜¯å±æ€§å€¼
                 if (Anior.isString(args[0]) && Anior.isString(args[1])) {
-                    //±éÀúAniorÖĞËùÓĞµÄDOMÔªËØ£¬²¢ÉèÖÃÑùÊ½
+                    //éå†Aniorä¸­æ‰€æœ‰çš„DOMå…ƒç´ ï¼Œå¹¶è®¾ç½®æ ·å¼
                     return this.each(function () {
                         this.style[args[0]] = args[1];
                     });
                 }
             } else if (len == 1) {
-                if (Anior.isString(option)) { // Èç¹ûoption´«ÈëÊÇÒ»¸ö×Ö·û´®
+                if (Anior.isString(option)) { // å¦‚æœoptionä¼ å…¥æ˜¯ä¸€ä¸ªå­—ç¬¦ä¸²
                     return this[0].style[option] || Anior.getStyle(this[0], option);
-                } else if (typeof option == 'object') { // Èç¹ûoption ´«ÈëµÄÊÇÒ»¸ö¶ÔÏó
-                    //Ñ­»·Anoir¶ÔÏóµÄÃ¿Ò»¸öDOMÔªËØ
+                } else if (typeof option == 'object') { // å¦‚æœoption ä¼ å…¥çš„æ˜¯ä¸€ä¸ªå¯¹è±¡
+                    //å¾ªç¯Anoirå¯¹è±¡çš„æ¯ä¸€ä¸ªDOMå…ƒç´ 
                         return this.each(function () {
-                            //Ñ­»·ĞèÒªÉèÖÃµÄÊôĞÔÃû
+                            //å¾ªç¯éœ€è¦è®¾ç½®çš„å±æ€§å
                             for (var k in option) {
-                                //ÉèÖÃÃ¿Ò»¸öDOM¶ÔÏóµÄstyleÊôĞÔk ÎªoptionÖĞµÄÊôĞÔÖµ
+                                //è®¾ç½®æ¯ä¸€ä¸ªDOMå¯¹è±¡çš„styleå±æ€§k ä¸ºoptionä¸­çš„å±æ€§å€¼
                                 this.style[k] = option[k];
                             }
                         });
                 }
             }
             return this;
-            // ·µ»ØthisÖ§³ÖÁ´Ê½±à³Ì
+            // è¿”å›thisæ”¯æŒé“¾å¼ç¼–ç¨‹
         },
 
-        // addClass ( Îªdom¶ÔÏóÌí¼ÓÄ³¸öÀàÃû )
+        // addClass ( ä¸ºdomå¯¹è±¡æ·»åŠ æŸä¸ªç±»å )
         addClass: function (name) {
             return this.each(function () {
                 var classTxt = this.className;
-                // ÅĞ¶ÏclassTxtÊÇ·ñÓĞÖµ
+                // åˆ¤æ–­classTxtæ˜¯å¦æœ‰å€¼
                 if (classTxt) {
-                    // ÔÙÅĞ¶ÏclassTxtÖĞÊÇ·ñÒÑ¾­°üº¬name
+                    // å†åˆ¤æ–­classTxtä¸­æ˜¯å¦å·²ç»åŒ…å«name
                     if ((' ' + classTxt + ' ').indexOf(' ' + name + ' ') == -1) {
-                        //classTxtÖĞÎ´°üº¬name£¬¾Í½«nameÌí¼Ó½øÈ¥
+                        //classTxtä¸­æœªåŒ…å«nameï¼Œå°±å°†nameæ·»åŠ è¿›å»
                         this.className += ' ' + name;
                     }
-                } else { //Ã»ÓĞÖµµÄ»° ¾ÍÖ±½Ó½«nameÌí¼ÓÎªDOMÔªËØµÄÀàÃû
+                } else { //æ²¡æœ‰å€¼çš„è¯ å°±ç›´æ¥å°†nameæ·»åŠ ä¸ºDOMå…ƒç´ çš„ç±»å
                     this.className = name;
                 }
             });
         },
 
-        // removeClass ( È¥³ıdom¶ÔÏóµÄÄ³¸öÀàÃû )
+        // removeClass ( å»é™¤domå¯¹è±¡çš„æŸä¸ªç±»å )
         removeClass: function (name) {
-            // ±éÀúthisÖĞµÄÃ¿Ò»¸ödomÔªËØ
+            // éå†thisä¸­çš„æ¯ä¸€ä¸ªdomå…ƒç´ 
             return this.each(function () {
-                // »ñµÃDOMÔªËØµÄclassÊôĞÔ
+                // è·å¾—DOMå…ƒç´ çš„classå±æ€§
                 var classTxt = this.className;
-                // Èç¹û¸ÃdomÔªËØÓĞclassÊôĞÔ
+                // å¦‚æœè¯¥domå…ƒç´ æœ‰classå±æ€§
                 if (classTxt) {
-                    // Í¨¹ı¿Õ¸ñ½«classTxt·Ö¸ô³ÉÒ»¸öÊı×é
+                    // é€šè¿‡ç©ºæ ¼å°†classTxtåˆ†éš”æˆä¸€ä¸ªæ•°ç»„
                     var arr = classTxt.split(' ');
-                    //´ÓÓÒÍù×ó±éÀúÊı×é
+                    //ä»å³å¾€å·¦éå†æ•°ç»„
                     for (var i = arr.length - 1; i >= 0; i--) {
-                        //Èç¹ûÊı×éÖĞÓĞname£¬ÔòÈ¥µôËû
+                        //å¦‚æœæ•°ç»„ä¸­æœ‰nameï¼Œåˆ™å»æ‰ä»–
                         if (arr[i] == name) {
                             arr.splice(i, 1);
                         }
                     }
-                    //½«±éÀú´¦ÀíºóµÄÊı×éÓÃ¿Õ¸ñÆ´½Ó£¬¸³Öµµ½¸ÃdomÔªËØµÄclassÊôĞÔÉÏ
+                    //å°†éå†å¤„ç†åçš„æ•°ç»„ç”¨ç©ºæ ¼æ‹¼æ¥ï¼Œèµ‹å€¼åˆ°è¯¥domå…ƒç´ çš„classå±æ€§ä¸Š
                     this.className = arr.join(' ');
                 }
             });
         },
 
-        // hasClass ( ÓÃÀ´ÅĞ¶ÏÊÇ·ñ°üº¬Ä³¸öÀàÃû£¬·µ»Øtrue»òfalse )
+        // hasClass ( ç”¨æ¥åˆ¤æ–­æ˜¯å¦åŒ…å«æŸä¸ªç±»åï¼Œè¿”å›trueæˆ–false )
         hasClass: function (name) {
-            // ±éÀúthisÖĞµÄËùÓĞµÄdomÔªËØ
+            // éå†thisä¸­çš„æ‰€æœ‰çš„domå…ƒç´ 
             for (var i = 0; i < this.length; i++) {
-                // ÅĞ¶ÏËùÓĞµÄdom¶ÔÏóµÄclassÊôĞÔÊÇ·ñº¬ÓĞname
+                // åˆ¤æ–­æ‰€æœ‰çš„domå¯¹è±¡çš„classå±æ€§æ˜¯å¦å«æœ‰name
                 if ((' ' + this[i].className + ' ').indexOf(' ' + name + ' ') != -1) {
-                    //Èç¹û°üº¬name£¬·µ»Øtrue
+                    //å¦‚æœåŒ…å«nameï¼Œè¿”å›true
                     return true;
                 }
             }
-            // Èç¹ûËùÓĞµÄdom¶ÔÏóµÄclassÊôĞÔ¶¼²»°üº¬name£¬·µ»Øfalse
+            // å¦‚æœæ‰€æœ‰çš„domå¯¹è±¡çš„classå±æ€§éƒ½ä¸åŒ…å«nameï¼Œè¿”å›false
             return false;
         },
 
         // toggleClass
         toggleClass: function (name) {
-            // ÅĞ¶ÏÊÇ·ñÓµÓĞnameÕâ¸öÀàÃû
+            // åˆ¤æ–­æ˜¯å¦æ‹¥æœ‰nameè¿™ä¸ªç±»å
             if (this.hasClass(name)) {
-                // Èç¹ûÓĞÕâ¸öÀàÃû£¬¾ÍÒÆ³ı
+                // å¦‚æœæœ‰è¿™ä¸ªç±»åï¼Œå°±ç§»é™¤
                 this.removeClass(name);
             } else {
-                // Èç¹ûÃ»ÓĞÕâ¸öÀàÃû£¬¾ÍÌí¼ÓÕâ¸öÀàÃû
+                // å¦‚æœæ²¡æœ‰è¿™ä¸ªç±»åï¼Œå°±æ·»åŠ è¿™ä¸ªç±»å
                 this.addClass(name);
             }
-            return this;// Ö§³ÖÁ´Ê½±à³Ì
+            return this;// æ”¯æŒé“¾å¼ç¼–ç¨‹
         }
 
     });
 
-    // ÊôĞÔ²Ù×÷Ä£¿é
+    // å±æ€§æ“ä½œæ¨¡å—
     Anior.fn.extend({
 
-        // attr ( ÎªdomÔªËØÉèÖÃ ×Ô¶¨Òå ÊôĞÔºÍÊôĞÔÖµ )
+        // attr ( ä¸ºdomå…ƒç´ è®¾ç½® è‡ªå®šä¹‰ å±æ€§å’Œå±æ€§å€¼ )
         attr: function (name, value) {
-            // ÅĞ¶ÏvalueÊÇ·ñ´æÔÚ »ò Îª¿Õ
+            // åˆ¤æ–­valueæ˜¯å¦å­˜åœ¨ æˆ– ä¸ºç©º
             if (value || value == '') {
-                // ÅĞ¶ÏnameºÍvalueÊÇ·ñÎª×Ö·û´®
+                // åˆ¤æ–­nameå’Œvalueæ˜¯å¦ä¸ºå­—ç¬¦ä¸²
                 if (Anior.isString(name) && Anior.isString(value)) {
-                    // ±éÀúthisÖĞµÄËùÓĞdomÔªËØ
+                    // éå†thisä¸­çš„æ‰€æœ‰domå…ƒç´ 
                     return this.each(function () {
-                        // ÎªËùÓĞdomÔªËØµÄÉèÖÃnameÊôĞÔ ÊôĞÔÖµÎªvalue
+                        // ä¸ºæ‰€æœ‰domå…ƒç´ çš„è®¾ç½®nameå±æ€§ å±æ€§å€¼ä¸ºvalue
                         this.setAttribute(name, value);
                     });
                 }
             } else {
-                // ÅĞ¶ÏnameÊÇ·ñÎª×Ö·û´®
+                // åˆ¤æ–­nameæ˜¯å¦ä¸ºå­—ç¬¦ä¸²
                 if (Anior.isString(name)) {
-                    // ·µ»ØµÚÒ»¸ödomÔªËØµÄnameÊôĞÔÖµ
+                    // è¿”å›ç¬¬ä¸€ä¸ªdomå…ƒç´ çš„nameå±æ€§å€¼
                     return this[0].getAttribute(name);
                 }
             }
-            return this;// Ö§³ÖÁ´Ê½±à³Ì
+            return this;// æ”¯æŒé“¾å¼ç¼–ç¨‹
         },
 
-        // prop ( ÎªdomÔªËØÉèÖÃ Ô­ÓĞ ÊôĞÔºÍÊôĞÔÖµ )
+        // prop ( ä¸ºdomå…ƒç´ è®¾ç½® åŸæœ‰ å±æ€§å’Œå±æ€§å€¼ )
         prop: function (name, value) {
-            // ÅĞ¶ÏvalueÊÇ·ñ´æÔÚ »ò Îª¿Õ
+            // åˆ¤æ–­valueæ˜¯å¦å­˜åœ¨ æˆ– ä¸ºç©º
             if (value || value == '') {
-                // ÅĞ¶ÏnameÊÇ·ñÎª×Ö·û´®
+                // åˆ¤æ–­nameæ˜¯å¦ä¸ºå­—ç¬¦ä¸²
                 if (Anior.isString(name)) {
-                    // ±éÀúthisÖĞµÄËùÓĞdomÔªËØ
+                    // éå†thisä¸­çš„æ‰€æœ‰domå…ƒç´ 
                     return this.each(function () {
-                        // ÎªËùÓĞdomÔªËØµÄÉèÖÃnameÊôĞÔ ÊôĞÔÖµÎªvalue
+                        // ä¸ºæ‰€æœ‰domå…ƒç´ çš„è®¾ç½®nameå±æ€§ å±æ€§å€¼ä¸ºvalue
                         this[name] = value;
                     });
                 }
             } else {
-                // ÅĞ¶ÏnameÊÇ·ñÎª×Ö·û´®
+                // åˆ¤æ–­nameæ˜¯å¦ä¸ºå­—ç¬¦ä¸²
                 if (Anior.isString(name)) {
-                    // ·µ»ØµÚÒ»¸ödomÔªËØµÄnameÊôĞÔÖµ
+                    // è¿”å›ç¬¬ä¸€ä¸ªdomå…ƒç´ çš„nameå±æ€§å€¼
                     return this[0][name];
                 }
             }
-            return this;// Ö§³ÖÁ´Ê½±à³Ì
+            return this;// æ”¯æŒé“¾å¼ç¼–ç¨‹
         },
 
-        //val ( ÎªdomÔªËØÉèÖÃvalueÊôĞÔµÄÊôĞÔÖµ )
+        //val ( ä¸ºdomå…ƒç´ è®¾ç½®valueå±æ€§çš„å±æ€§å€¼ )
         val: function (v) {
             return this.attr('value', v);
         },
@@ -782,14 +782,14 @@
 
         //text
         text: function (txt) {
-            // ÅĞ¶ÏtxtÊÇ·ñ´æÔÚ »ò Îª¿Õ
+            // åˆ¤æ–­txtæ˜¯å¦å­˜åœ¨ æˆ– ä¸ºç©º
             if (txt || txt === '') {
-                // ±éÀúthisÖĞµÄËùÓĞdomÔªËØ
+                // éå†thisä¸­çš„æ‰€æœ‰domå…ƒç´ 
                 return this.each(function () {
-                    this.innerHTML = ''; // É¾³ıÀïÃæÏÖÓĞµÄ¶«Î÷
-                    // ÓÃtxt´´½¨Ò»¸öÎÄ±¾½Úµãtemp
+                    this.innerHTML = ''; // åˆ é™¤é‡Œé¢ç°æœ‰çš„ä¸œè¥¿
+                    // ç”¨txtåˆ›å»ºä¸€ä¸ªæ–‡æœ¬èŠ‚ç‚¹temp
                     var temp = document.createTextNode(txt + '');
-                    // ½«tempÌí¼Óµ½DOMÔªËØÖĞ
+                    // å°†tempæ·»åŠ åˆ°DOMå…ƒç´ ä¸­
                     this.appendChild(temp);
                 });
             } else {
@@ -816,7 +816,7 @@
     });
 
 
-    // ¶¯»­´¦Àí
+    // åŠ¨ç”»å¤„ç†
 
     Anior.Easing = {
         line: function ( x, t, b, c, d ) {
@@ -950,19 +950,19 @@
     Anior.fn.extend({
 
         animate: function ( props, dur, easing, fn ) {
-            // ¼ÙÉè props ¾ÍÊÇ x ºÍ y
+            // å‡è®¾ props å°±æ˜¯ x å’Œ y
             var x = this[ 0 ],
                 isOver = false,
                 that = this;
-            // 1. »ñµÃµ±Ç°Î»ÖÃÓëÊ±¼ä
+            // 1. è·å¾—å½“å‰ä½ç½®ä¸æ—¶é—´
             var startx = parseInt( x.style.left || x.offsetLeft ),
                 starty = parseInt( x.style.top  || x.offsetTop ),
 
                 startTime = +new Date();
 
-            // 2.¼ÆÊ±Æ÷Ä£¿é
+            // 2.è®¡æ—¶å™¨æ¨¡å—
             this.intervalId = setInterval(function () {
-                // 3. »ñµÃÒÑ¾­¹ıµÄÊ±¼ä
+                // 3. è·å¾—å·²ç»è¿‡çš„æ—¶é—´
                 var t = (+new Date) - startTime;
 
                 if ( t >= dur ) {
@@ -971,10 +971,10 @@
                     isOver = true;
                 }
 
-                // 4. ÊµÏÖ»º¶¯
-                easing = easing || 'change';// ÉèÖÃÄ¬ÈÏÖµÎªchange±äËÙ
+                // 4. å®ç°ç¼“åŠ¨
+                easing = easing || 'change';// è®¾ç½®é»˜è®¤å€¼ä¸ºchangeå˜é€Ÿ
 
-                // 5. ÉèÖÃÊôĞÔÖµ
+                // 5. è®¾ç½®å±æ€§å€¼
                 x.style.left = startx +
                     Anior.Easing[ easing ]( null, t, startx, parseInt(props[ 'left' ]), dur )
                     + 'px';
@@ -1001,7 +1001,7 @@
 
 
 
-    // ½«Èë¿Úº¯Êı±©Â¶ÔÚÍâÈÃÓÃ»§¿ÉÒÔ·ÃÎÊÊ¹ÓÃ
+    // å°†å…¥å£å‡½æ•°æš´éœ²åœ¨å¤–è®©ç”¨æˆ·å¯ä»¥è®¿é—®ä½¿ç”¨
     window.I = window.Anior = Anior;
 
 })
